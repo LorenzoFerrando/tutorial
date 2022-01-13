@@ -4,10 +4,10 @@ println "\nI want to BLAST $params.query to $params.dbDir/$params.dbName using $
 
 process runBlast {
 
-  script:
-  """
-  blastn  -num_threads 2 -db $PWD/DB/blastDB -query $PWD/input.fasta -outfmt 6 -out input.blastout
-  """
 
+script:
+  """
+  $params.app  -num_threads $params.threads -db $params.dbDir/$params.dbName -query $params.query -outfmt $params.outfmt $params.options -out $params.outFileName
+  """
 }
 
